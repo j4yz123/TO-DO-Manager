@@ -18,11 +18,11 @@ namespace TODO1
         private void InitializeCustomHandlers()
         {
             this.dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
-            this.createToolStripMenuItem.Click += createToolStripMenuItem_Click;
-            this.deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
-            this.activeToolStripMenuItem.Click += activeToolStripMenuItem_Click;
-            this.completedToolStripMenuItem.Click += completedToolStripMenuItem_Click;
-            this.resetFilterToolStripMenuItem.Click += resetFilterToolStripMenuItem_Click;
+            this.button1.Click += createToolStripMenuItem_Click;
+            this.button2.Click += deleteToolStripMenuItem_Click;
+            this.button3.Click += activeToolStripMenuItem_Click;
+            this.button4.Click += completedToolStripMenuItem_Click;
+            this.button5.Click += resetFilterToolStripMenuItem_Click;
             this.newToolStripMenuItem.Click += newToolStripMenuItem_Click;
             this.openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             this.saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
