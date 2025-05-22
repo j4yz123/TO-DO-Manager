@@ -17,7 +17,7 @@ namespace TODO1
 
         private void InitializeCustomHandlers()
         {
-            this.dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
+            this.dataGridView1.CellDoubleClick += createToolStripMenuItem_Click;
             this.button1.Click += createToolStripMenuItem_Click;
             this.button2.Click += deleteToolStripMenuItem_Click;
             this.button3.Click += activeToolStripMenuItem_Click;
@@ -124,38 +124,6 @@ namespace TODO1
                 if (!row.IsNewRow)
                 {
                     dataGridView1.Rows.Remove(row);
-                }
-            }
-        }
-
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex == 0)
-            {
-                var row = dataGridView1.Rows[e.RowIndex];
-                using (var taskForm = new TaskForm())
-                {
-                    taskForm.InitialTaskName = row.Cells["task"].Value?.ToString();
-
-                    if (DateTime.TryParse(row.Cells["Date"].Value?.ToString(), out var date))
-                    {
-                        taskForm.InitialDueDate = date;
-                    }
-                    else
-                    {
-                        taskForm.InitialDueDate = null;
-                    }
-
-                    taskForm.InitialStatus = row.Cells["type"].Value?.ToString();
-
-                    if (taskForm.ShowDialog() == DialogResult.OK)
-                    {
-                        row.Cells["task"].Value = taskForm.TaskName;
-                        row.Cells["Date"].Value = taskForm.DueDate.HasValue
-                            ? taskForm.DueDate.Value.ToString("yyyy-MM-dd")
-                            : "Не указано";
-                        row.Cells["type"].Value = taskForm.Status;
-                    }
                 }
             }
         }

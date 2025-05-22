@@ -35,16 +35,21 @@ namespace TODO1
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -137,31 +142,31 @@ namespace TODO1
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // openFileDialog1
@@ -174,31 +179,10 @@ namespace TODO1
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Location = new System.Drawing.Point(719, 27);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 85);
+            this.groupBox1.Size = new System.Drawing.Size(200, 78);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Task";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.button5);
-            this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Controls.Add(this.button3);
-            this.groupBox2.Location = new System.Drawing.Point(719, 118);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 110);
-            this.groupBox2.TabIndex = 3;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Filters";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(6, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(182, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Create";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
@@ -209,23 +193,26 @@ namespace TODO1
             this.button2.Text = "Delete";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // button1
             // 
-            this.button3.Location = new System.Drawing.Point(6, 19);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(182, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Active";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button1.Location = new System.Drawing.Point(6, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(182, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Create";
+            this.button1.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // groupBox2
             // 
-            this.button4.Location = new System.Drawing.Point(6, 48);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(182, 23);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Completed";
-            this.button4.UseVisualStyleBackColor = true;
+            this.groupBox2.Controls.Add(this.button5);
+            this.groupBox2.Controls.Add(this.button4);
+            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Location = new System.Drawing.Point(719, 145);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 110);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Filters";
             // 
             // button5
             // 
@@ -236,11 +223,69 @@ namespace TODO1
             this.button5.Text = "Reset Filter";
             this.button5.UseVisualStyleBackColor = true;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(6, 48);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(182, 23);
+            this.button4.TabIndex = 3;
+            this.button4.Text = "Completed";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(6, 19);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(182, 23);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "Active";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.button7);
+            this.groupBox3.Controls.Add(this.button8);
+            this.groupBox3.Controls.Add(this.button9);
+            this.groupBox3.Location = new System.Drawing.Point(719, 261);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(200, 110);
+            this.groupBox3.TabIndex = 5;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "DataBase";
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(6, 77);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(182, 23);
+            this.button7.TabIndex = 4;
+            this.button7.Text = "Export Project";
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(6, 48);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(182, 23);
+            this.button8.TabIndex = 3;
+            this.button8.Text = "Import Project";
+            this.button8.UseVisualStyleBackColor = true;
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(6, 19);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(182, 23);
+            this.button9.TabIndex = 2;
+            this.button9.Text = "Create Project";
+            this.button9.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(919, 450);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
@@ -253,6 +298,7 @@ namespace TODO1
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -278,5 +324,9 @@ namespace TODO1
         private Button button5;
         private Button button4;
         private Button button3;
+        private GroupBox groupBox3;
+        private Button button7;
+        private Button button8;
+        private Button button9;
     }
 }
