@@ -338,11 +338,15 @@ namespace TODO1
                     conn.Open();
                     using (var cmd = new SQLiteCommand("INSERT INTO task (project_id, task, date, type) VALUES (@project_id, @task, @date, @type)", conn))
                     {
-                        cmd.Parameters.AddWithValue("@project_id", projectId);
-                        cmd.Parameters.AddWithValue("@task", row.Cells["task"].Value?.ToString() ?? "Неизвестная задача");
-                        cmd.Parameters.AddWithValue("@date", row.Cells["Date"].Value?.ToString() ?? "Не указано");
-                        cmd.Parameters.AddWithValue("@type", row.Cells["type"].Value?.ToString() ?? "Active");
-                        cmd.ExecuteNonQuery();
+                        if (row.Cells["task"].Value?.ToString() != null && row.Cells["Date"].Value?.ToString() != null && row.Cells["type"].Value?.ToString() != null)
+                        {
+                            cmd.Parameters.AddWithValue("@project_id", projectId);
+                            cmd.Parameters.AddWithValue("@task", row.Cells["task"].Value?.ToString() ?? "Неизвестная задача");
+                            cmd.Parameters.AddWithValue("@date", row.Cells["Date"].Value?.ToString() ?? "Не указано");
+                            cmd.Parameters.AddWithValue("@type", row.Cells["type"].Value?.ToString() ?? "Active");
+                            cmd.ExecuteNonQuery();
+                        }
+                        
                     }
                 }
             }
