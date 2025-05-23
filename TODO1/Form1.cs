@@ -2,17 +2,23 @@
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
+using System.Data.SQLite;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace TODO1
 {
     public partial class Form1 : Form
     {
         private string currentFilePath = null;
+        private string connectionString = @"Data Source=db.db";
 
         public Form1() : base()
         {
             InitializeComponent();
             InitializeCustomHandlers();
+
         }
 
         private void InitializeCustomHandlers()
@@ -192,5 +198,153 @@ namespace TODO1
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
         }
-    }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var conn = new SQLiteConnection(connectionString))
+                {
+                    conn.Open();
+
+                    var inputName = Interaction.InputBox("Введите название проекта:", "Название проекта");
+
+                    if (!string.IsNullOrEmpty(inputName))
+                    {
+                        using (var cmd = new SQLiteCommand(conn))
+                        {
+                            cmd.CommandText = "INSERT INTO project(name) VALUES(@name)";
+                            cmd.Parameters.AddWithValue("@name", inputName);
+                            cmd.ExecuteNonQuery();
+
+                            MessageBox.Show($"Проект {inputName} успешно добавлен.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            ShowProjectSelectionDialog(async (selectedProjectId) =>
+            {
+                await ImportTasksAsync(selectedProjectId);
+            });
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            ShowProjectSelectionDialog(async (selectedProjectId) =>
+            {
+                await ExportTasksAsync(selectedProjectId);
+            });
+        }
+
+        private void ShowProjectSelectionDialog(Action<int> onSelectedAction)
+        {
+            var form = new ProjectSelectionForm(GetAllProjectNames());
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                onSelectedAction.Invoke(form.SelectedProjectId);
+            }
+        }
+
+        private async Task ImportTasksAsync(int projectId)
+        {
+            ClearTaskTable();
+            await LoadTasksForProject(projectId);
+        }
+
+        private async Task ExportTasksAsync(int projectId)
+        {
+            DeleteExistingTasks(projectId);
+            InsertNewTasksFromGrid(projectId);
+        }
+
+        private List<string> GetAllProjectNames()
+        {
+            var names = new List<string>();
+            using (var conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+                using (var cmd = new SQLiteCommand("SELECT name FROM project", conn))
+                {
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            names.Add(reader.GetString(0));
+                        }
+                    }
+                }
+            }
+            return names;
+        }
+
+        private async Task LoadTasksForProject(int projectId)
+        {
+            dataGridView1.Rows.Clear();
+            using (var conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+                using (var cmd = new SQLiteCommand("SELECT * FROM task WHERE project_id=@id", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", projectId);
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            AddRowToGrid(reader.GetString(2), reader.GetString(3), reader.GetString(4));
+                        }
+                    }
+                }
+            }
+        }
+
+        private void AddRowToGrid(string task, string date, string type)
+        {
+            dataGridView1.Rows.Add(task, date, type);
+        }
+
+        private void ClearTaskTable()
+        {
+            dataGridView1.Rows.Clear();
+        }
+
+        private void DeleteExistingTasks(int projectId)
+        {
+            using (var conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+                using (var cmd = new SQLiteCommand("DELETE FROM task WHERE project_id=@id", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", projectId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private void InsertNewTasksFromGrid(int projectId)
+        {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                using (var conn = new SQLiteConnection(connectionString))
+                {
+                    conn.Open();
+                    using (var cmd = new SQLiteCommand("INSERT INTO task (project_id, task, date, type) VALUES (@project_id, @task, @date, @type)", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@project_id", projectId);
+                        cmd.Parameters.AddWithValue("@task", row.Cells["task"].Value?.ToString() ?? "Неизвестная задача");
+                        cmd.Parameters.AddWithValue("@date", row.Cells["Date"].Value?.ToString() ?? "Не указано");
+                        cmd.Parameters.AddWithValue("@type", row.Cells["type"].Value?.ToString() ?? "Active");
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+     }
 }
