@@ -249,6 +249,7 @@ namespace TODO1
             var form = new ProjectSelectionForm(GetAllProjectNames());
             if (form.ShowDialog(this) == DialogResult.OK)
             {
+                label2.Text = form.SelectedProjectName;
                 onSelectedAction.Invoke(form.SelectedProjectId);
             }
         }

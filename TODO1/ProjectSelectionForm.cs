@@ -14,7 +14,9 @@ namespace TODO1
     public partial class ProjectSelectionForm : Form
     {
         private int selectedProjectId;
+        private string selectedProjectName;
         public int SelectedProjectId => selectedProjectId;
+        public string SelectedProjectName => selectedProjectName;
         public ProjectSelectionForm(List<string> projects)
         {
             InitializeComponent();
@@ -28,6 +30,7 @@ namespace TODO1
         private void button1_Click(object sender, EventArgs e)
         {
             selectedProjectId = GetSelectedProjectId(comboBoxProjects.SelectedItem.ToString());
+            selectedProjectName = comboBoxProjects.SelectedItem.ToString();
             this.DialogResult = DialogResult.OK;
             Close();
         }
